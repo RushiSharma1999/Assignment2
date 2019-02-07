@@ -3,27 +3,46 @@
 using namespace std;
 
 
-int reverseArray (int array[], int n)
+void reverseArray (double *a, int size)
 {
-        for (int i = 0; i < n; i++)     
-        {
-                int temp = array[i];
-                array[i] = array[i+1];
-                array[i+1] = temp;
-                return temp;
-        }
 
-        
+
+	for (double* end = a+size-1; a < end; ++a, --end)
+	{
+        double temp = *a;
+        *a = *end;
+        *end = temp; 	
+	}
+
+
 }
 
 int main () 
 {
 
-        int array[4] = { 1, 2, 3, 4};
-        cout << reverseArray( array, 4) << endl;
-      
-        
-        system("read -p 'Press Enter to continue...' var");
+	int size = 0; 
+ 	double array[size]; 
+  	int current_size = 0;
+	cout << "Enter the size of the matrix:: " ;
+	cin >> size;
+
+  /*INPUT*/
+  double input;
+  while ((cin >> input) && (current_size < size))
+    array[current_size++] = input; //Braces were wrong and caused problems
+
+  /*REVERSE*/
+  reverseArray (array, current_size); 
+
+  /*OUTPUT*/
+  std::cout << "Reversed input is: ";
+  for(int i = 0; i < current_size; ++i)
+  {
+        std::cout << array [i] << ' ';
+  }
+
+   
+       system("read -p 'Press Enter to continue...' var");
         return 0;
 }
 
