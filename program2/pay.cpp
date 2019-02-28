@@ -13,7 +13,7 @@ void readData(Person employees[], int N)
 
   string fName;
 	string lName;
-	float pay;
+	float rate;
 	float hours;
 	string line;
   int i = 0;
@@ -23,7 +23,7 @@ void readData(Person employees[], int N)
   if(file.is_open())
     {
       file >> fName;
-      while(!inFile.eof())
+      while(!file.eof())
       {
         file >> lName >> rate >> hours;
         getline(file, line);
@@ -35,8 +35,8 @@ void readData(Person employees[], int N)
         file >> fName;
 
       }
-      inFile.close();
-
+      file.close();
+    }
 
 }
 
@@ -44,9 +44,8 @@ void writeData(Person employees[], int N)
 {
 
 
-  string fullName;
-  float total;
-
+  string Name;
+  float Pay;
   ofstream file("output.txt");
 
   	if(file.is_open())
@@ -68,13 +67,13 @@ int main()
 {
 
   int N = 0;
-  Person emloyees[N];
+  Person employees[N];
   string fName, lName;
 	float rate, hours;
   readData(employees, 6);
   writeData(employees, 6);
 
-
+system("read -p 'Press Enter to continue...' var");
 return 0;
 
 
