@@ -2,6 +2,11 @@
 
 
 
+Person::Person()
+{
+
+};
+
 void Person::setLastName(string lName)
 {
   lastName = lName;

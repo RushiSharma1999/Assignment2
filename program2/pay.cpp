@@ -1,63 +1,66 @@
-#include "person.cpp"
 #include <iostream>
 #include <string>
 #include <cstring>
 #include <fstream>
+#include "person.cpp"
 
 using namespace std;
 
 
-void readData(Person employees[], int N)
+int readData(Person employees[], int &N)
 {
 
 
-  string fName;
-	string lName;
-	float rate;
-	float hours;
+  string fName, lName;
+  float rate, hours;
 	string line;
   int i = 0;
 
-  ifstream file("input.txt");
+  ifstream inFile;
 
-  if(file.is_open())
+  inFile.open("input.txt");
+
+  if(inFile.is_open())
     {
-      file >> fName;
-      while(!file.eof())
+      inFile >> fName;
+      while(!inFile.eof())
       {
-        file >> lName >> rate >> hours;
-        getline(file, line);
+        inFile >> lName;
+        inFile >> rate;
+        inFile >> hours;
+        getline(inFile, line);
         employees[i].setFirstName(fName);
         employees[i].setLastName(lName);
         employees[i].setPayRate(rate);
         employees[i].setHoursWorked(hours);
         i++;
-        file >> fName;
-
+        inFile >> fName;
       }
-      file.close();
     }
+      inFile.close();
+    return i;
 
 }
 
-void writeData(Person employees[], int N)
+void writeData(Person employees[], int num)
 {
 
 
   string Name;
   float Pay;
-  ofstream file("output.txt");
+  ofstream inFile;
+  inFile.open("output.txt");
 
-  	if(file.is_open())
+  	if(inFile.is_open())
   	{
-  		for(int i = 0; i < N; i++)
+  		for(int j = 0; j < num; j++)
   		{
-  			Name = employees[i].fullName();
-  			Pay = employees[i].totalPay();
-  			file << Name << " " << Pay << endl;
+  			Name = employees[j].fullName();
+  			Pay = employees[j].totalPay();
+  			inFile << Name << " " << Pay << endl;
   			cout << Name << " " << Pay << endl;
   		}
-  		file.close();
+      inFile.close();
   }
 
 }
@@ -66,14 +69,13 @@ void writeData(Person employees[], int N)
 int main()
 {
 
-  int N = 0;
+  int N = 20;
+  int num;
   Person employees[N];
-  string fName, lName;
-	float rate, hours;
-  readData(employees, 6);
-  writeData(employees, 6);
-
-system("read -p 'Press Enter to continue...' var");
+  readData(employees, N);
+  num = readData(employees, N);
+  writeData(employees, num);
+//system("read -p 'Press Enter to continue...' var");
 return 0;
 
 
