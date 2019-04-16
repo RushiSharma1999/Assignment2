@@ -2,12 +2,13 @@
 #include <string>
 #include <cstring>
 #include <fstream>
+#include <vector>
 #include "person.cpp"
 
 using namespace std;
 
 
-int readData(Person employees[], int &N)
+int readData(vector<Person> &employees, int &N)
 {
 
 
@@ -29,10 +30,7 @@ int readData(Person employees[], int &N)
         inFile >> rate;
         inFile >> hours;
         getline(inFile, line);
-        employees[i].setFirstName(fName);
-        employees[i].setLastName(lName);
-        employees[i].setPayRate(rate);
-        employees[i].setHoursWorked(hours);
+        employees.emplace_back(fName, lName, rate, hours);
         i++;
         inFile >> fName;
       }
@@ -42,7 +40,7 @@ int readData(Person employees[], int &N)
 
 }
 
-void writeData(Person employees[], int num)
+void writeData(vector<Person> &employees, int num)
 {
 
 
@@ -71,11 +69,11 @@ int main()
 
   int N = 20;
   int num;
-  Person employees[N];
+  vector<Person> employees;
   readData(employees, N);
-  num = readData(employees, N);
-  writeData(employees, num);
-//system("read -p 'Press Enter to continue...' var");
+	num = readData(employees,N);
+	writeData(employees, num);
+  system("read -p 'Press Enter to continue...' var");
 return 0;
 
 
